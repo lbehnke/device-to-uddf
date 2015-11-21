@@ -1,0 +1,28 @@
+offset  |     format   |  testvalue  | content
+————----| ————---------|-------------|-----------------------------------------------| 
+$00-$1D | MSB binary   | …           | unused by the PC software, probably configuration values for the computer | 
+$1E-$1F | MSB binary   | $6038       | max. depth in ft * 128.0 | | 
+$20-$21 | MSB binary   | …           | total dive time in minutes | | 
+$22-$23 | MSB binary   | …           | total number of dives | | 
+$24     | MSB binary   | $0C         | Type of the computer ($03:Stinger, $04:Mosquito, $0A:new Vyper, $0C:Vyper or Cobra, $0B:Vytec, $0D:Gekko) | | 
+$25     | MSB binary   | …           | firmware version (30: Cobra, 33: Cobra, 21: Stinger, 15: Mosquito), the minor part is always .0.0 | | 
+$26-$29 | MSB binary   | $00005A38   | serial number e.g. a Vyper: $00.01.04.41 (= 00010465) | | 
+$2A-$2B | MSB binary   | $0000       | unknown | | 
+$2C-$49 | ASCII        | Vyper Diver | personal information (“Vyper Diver”, “Cobra Diver”, “ACW Diver”, “Mosquito Diver” fill with zero bytes, if changed by the user filled to the maximum length with spaces) | | 
+$4A-$50 | MSB binary   | $00..$00    | unknown (only the first 2 bytes are read by DM software) | | 
+$51-$52 | MSB binary   | …           | Ptr to the last $82 byte in the profile ringbuffer (not read by DM software) | | 
+$53     | MSB binary   | $14         | interval (10s, 20s, 30s or 60s) | | 
+$54     | MSB binary   | …           | altitude and personal settings (height (0..2) + 3 * personal (0..2)) | | 
+$55-$5B | MSB binary   | …           | unknown ($0E.05.1F.FF.1F.FF.01 : identical on all Suunto computers?) | | 
+$5C-$5D | MSB binary   | $0000       | max. freediving depth (only on Mosquito and Stinger) in ft * 128.0 | | 
+$5E-$5F | MSB binary   | $0000       | total freediving time in minutes (only on Mosquito and Stinger) | | 
+$60     | MSB binary   | $01         | 12⁄24 hour flag, 00 = 24 hours, 01 = 12 hours plus AM/PM | | 
+$61     | MSB binary   | $00         | unknown | | 
+$62     | MSB binary   | $01         | 0 = imperial, 1 = metric | | 
+$63     | MSB binary                 | $01 | Model (0: Air, 1:Nitrox/EAN, 2:Gauge; Mosquito, Stinger: Bit 3 set: Diving active, Bit 7 set: Free Diving active) | | 
+$64     | MSB binary   | $8A         | Light (Bit 7: on; Bit 0..6: time in s) | | 
+$65     | MSB binary   | $03         | Bit 0: dive time alarm = on, Bit 1: dive depth alarm = on | | 
+$66-$67 | MSB binary   | $0037       | dive time for the alarm in minutes (max. 999 minutes, normal max. 4:59) | | 
+$68-$69 | MSB binary   | $3138       | depth for the alarm in ft * 128.0 (rounded to 0.5m or 1ft; valid: 0m, 3m-150m (Cobra, Vyper: 100m)) | | 
+$6A-$70 | MSB binary   | …           | unknown ($46.00.00.00.00.00.00) | | 
+$71-$1FFF| MSB binary  | …           | ring buffer for the profile memory |
