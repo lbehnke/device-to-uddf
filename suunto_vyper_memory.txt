@@ -26,3 +26,26 @@ $66-$67 | MSB binary   | $0037       | dive time for the alarm in minutes (max. 
 $68-$69 | MSB binary   | $3138       | depth for the alarm in ft * 128.0 (rounded to 0.5m or 1ft; valid: 0m, 3m-150m (Cobra, Vyper: 100m)) | | 
 $6A-$70 | MSB binary   | …           | unknown ($46.00.00.00.00.00.00) | | 
 $71-$1FFF| MSB binary  | …           | ring buffer for the profile memory |
+
+
+One Dive
+
+0	    MSB binary	00, with Nitrox: OLF % * 2 ($32 * 2 = 100 CNS), if bit 7 is set: OTU instead of CNS
+1	    MSB binary	pressure at the end of the dive in bar / 2
+2	    MSB binary	temperature at the end of the dive in degress celcius
+3	    MSB binary	temperature at the max depth in degress celcius
+4…	    binary	profile data from the end to the beginning of the dive,this means reverse order!
+n	    MSB binary	minutes at the beginning of the dive
+n + 1	MSB binary	hours at the beginning of the dive
+n + 2	MSB binary	day at the beginning of the dive
+n + 3	MSB binary	month at the beginning of the dive
+n + 4	MSB binary	year at the beginning of the dive (90..99 = 1990..1999, 00..89 = 2000..2089)
+n + 5	MSB binary	temperature of the air in degress celcius
+n + 6	MSB binary	? unused? (PO2??? 0=1.2, 1=1.3, 2=1.4, 3=1.5, 4=1.6???)
+n + 7	MSB binary	Oxygen in % (= Nitrox mode, air mode: 0); Bit 6 & 7 are ignored.
+n + 8	MSB binary	pressure at the beginning of the dive in bar / 2
+n + 9	MSB binary	altitude and personal settings (height (0..2) + 3 * personal (0..2)). Bit 6:Gauge active (on Stinger and Mosquito)
+n + 10	MSB binary	interval (10s, 20s, 30s or 60s)
+n + 11	MSB binary	dive number in the Vyper/Cobra (for repetitive dives)
+n + 12	MSB binary	hours of the surface interval
+n + 13	MSB binary	minutes of the surface interval

@@ -357,12 +357,12 @@ private static int read(int timeout) throws Exception {
                                     actualCRC ^= completeData[i];
                                 }
                                 if (actualCRC != targetCRC) {
-                                    lastError = "CRC mismatch";
+                                    //lastError = "CRC mismatch";
                                 }
                                 signalResponse();
                             }
                             else if (baos.size() > expectedResponseLength+1) {
-                                lastError = "Unexpected response size: " + baos.size() + " (" + expectedResponseLength + ")";
+                                //lastError = "Unexpected response size: " + baos.size() + " (" + expectedResponseLength + ")";
                             }
                         }
                         else {
@@ -370,7 +370,7 @@ private static int read(int timeout) throws Exception {
                                 signalResponse();
                             }
                             else if (baos.size() > expectedResponseLength) {
-                                lastError = "Unexpected response size: " + baos.size() + " (" + expectedResponseLength + ")";
+                                //lastError = "Unexpected response size: " + baos.size() + " (" + expectedResponseLength + ")";
                             }
                         }
                     }

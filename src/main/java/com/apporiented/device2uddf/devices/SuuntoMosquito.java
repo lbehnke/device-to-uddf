@@ -55,9 +55,8 @@ public class SuuntoMosquito implements Device {
     private byte[] readMem(int address, int size) {
         byte[] cmd = createReadMemoryCommand(address, size, true);
         byte[] res = connection.sendAndReceive(cmd, 4, true, true);
-        byte[] mem = Arrays.copyOfRange(res, cmd.length, res.length-1);
-        Utils.logBytes("Memory", mem);
-        return mem;
+        Utils.logBytes("Memory", res);
+        return res;
     }
 
 
